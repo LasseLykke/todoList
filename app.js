@@ -6,10 +6,12 @@ const todoList = document.querySelector(".todo-list");
 // Event Listeners
 
 todoButton.addEventListener("click", addTodo);
+todoList.addEventListener("click", deleteCheck);
 
 // Functions
 
 function addTodo(event) {
+  // Sørger for at siden ikke refrecer.
   event.preventDefault();
 
   // ToDo Div
@@ -17,6 +19,7 @@ function addTodo(event) {
   todoDiv.classList.add("todo");
   // Create LI
   const newTodo = document.createElement("li");
+  // Trækker teskt ind fra input .classen
   newTodo.innerText = todoInput.value;
   newTodo.classList.add("todo-item");
   todoDiv.appendChild(newTodo);
@@ -37,4 +40,13 @@ function addTodo(event) {
 
   // Clear todo input value
   todoInput.value = "";
+}
+
+function deleteCheck(e) {
+  const item = e.target;
+  // DELETE todo
+  if (item.classList[0] === "trash-btn") {
+    const todo = item.parentElement;
+    todo.remove();
+  }
 }
