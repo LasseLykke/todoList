@@ -21,6 +21,8 @@ function addTodo(event) {
   todoDiv.classList.add("todo");
   // Create LI
   const newTodo = document.createElement("li");
+  // Add toDo to localStorage
+  saveLocalTodos(todoInput.value);
   // Trækker teskt ind fra input .classen
   newTodo.innerText = todoInput.value;
   newTodo.classList.add("todo-item");
@@ -86,4 +88,17 @@ function filterTodo(e) {
         break;
     }
   });
+}
+
+// Save to local storages
+
+function saveLocalTodos(todo) {
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  todos.push(todo);
+  localStorage.setItem("todos", JSON.stringify(todos));
 }
